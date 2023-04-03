@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import dj_database_url
 from pathlib import Path
 
 import os
@@ -76,14 +77,19 @@ WSGI_APPLICATION = 'your_space.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
+# This allows us to run our app locally and on Heroku
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+
+# If you prefer, you don't need this variables. You can just use the URL directly.
+db_name = 'your_space'
+user = 'your_space_admin'
+password = 'password'
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'your_space',
-        'USER': 'your_space_admin',
-        'PASSWORD': 'password',
-        'HOST': 'localhost'
-    }
+    'default': dj_database_url.config(
+        default=f'postgres://{user}:{password}@localhost/{db_name}'
+    )
 }
 
 

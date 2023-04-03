@@ -10,6 +10,7 @@ pillow = "*"
 heroku = "*"
 heroku3 = "*"
 gunicorn = "*"
+dj-database-url = "*"
 
 [dev-packages]
 
