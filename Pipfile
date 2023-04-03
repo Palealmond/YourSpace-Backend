@@ -9,6 +9,7 @@ psycopg2-binary = "*"
 pillow = "*"
 heroku = "*"
 heroku3 = "*"
+gunicorn = "*"
 
 [dev-packages]
 
