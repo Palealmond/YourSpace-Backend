@@ -12,14 +12,11 @@ from .serializers import (
 )
 
 
-
-
-
-@api_view(['GET', 'PUT', 'POST' 'DELETE'])
-def profile_detail(request, pk):
-    profile = get_object_or_404(Profile, pk=pk)
+@api_view(['GET', 'POST'])
+def profile_list(request):
     if request.method == 'GET':
-        serializer = ProfileSerializer(profile)
+        profiles = Profile.objects.all()
+        serializer = ProfileSerializer(profiles, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
         serializer = ProfileSerializer(data=request.data)
@@ -27,6 +24,20 @@ def profile_detail(request, pk):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+   
+
+
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def profile_detail(request, pk):
+    profile = get_object_or_404(Profile, pk=pk)
+    if request.method == 'GET':
+        serializer = ProfileSerializer(profile)
+        return Response(serializer.data)
     elif request.method == 'PUT':
         serializer = ProfileSerializer(profile, data=request.data)
         if serializer.is_valid():
