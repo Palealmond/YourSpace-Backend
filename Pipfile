@@ -11,6 +11,7 @@ heroku = "*"
 heroku3 = "*"
 gunicorn = "*"
 dj-database-url = "*"
+djangorestframework = "*"
 
 [dev-packages]
 
