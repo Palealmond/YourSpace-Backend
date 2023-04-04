@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'your_space_app'
+    'your_space_app',
+    'rest_framework',
+    # 'api.apps.Apiconfig'
 ]
 
 MIDDLEWARE = [
