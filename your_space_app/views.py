@@ -12,44 +12,44 @@ from .serializers import (
 )
 
 
-@api_view(['GET'])
-def profile_list(request):
-    if request.method == 'GET':
-        profiles = Profile.objects.all()
-        serializer = ProfileSerializer(profiles, many=True)
-        return Response(serializer.data)
-    # elif request.method == 'POST':
-    #     serializer = ProfileSerializer(data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# @api_view(['GET'])
+# def profile_list(request):
+#     if request.method == 'GET':
+#         profiles = Profile.objects.all()
+#         serializer = ProfileSerializer(profiles, many=True)
+#         return Response(serializer.data)
+#     # elif request.method == 'POST':
+#     #     serializer = ProfileSerializer(data=request.data)
+#     #     if serializer.is_valid():
+#     #         serializer.save()
+#     #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
-def create_profile(request):
-    serializer = ProfileSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# @api_view(['POST'])
+# def create_profile(request):
+#     serializer = ProfileSerializer(data=request.data)
+#     if serializer.is_valid():
+#         serializer.save()
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
+#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def profile_detail(request, pk):
-    profile = get_object_or_404(Profile, pk=pk)
-    if request.method == 'GET':
-        serializer = ProfileSerializer(profile)
-        return Response(serializer.data)
-    elif request.method == 'PUT':
-        serializer = ProfileSerializer(profile, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'DELETE':
-        profile.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+# @api_view(['GET', 'PUT', 'DELETE'])
+# def profile_detail(request, pk):
+#     profile = get_object_or_404(Profile, pk=pk)
+#     if request.method == 'GET':
+#         serializer = ProfileSerializer(profile)
+#         return Response(serializer.data)
+#     elif request.method == 'PUT':
+#         serializer = ProfileSerializer(profile, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     elif request.method == 'DELETE':
+#         profile.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET', 'POST'])

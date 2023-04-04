@@ -22,12 +22,11 @@ from your_space_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-
-    path('profiles/', views.profile_list),
-    # path('profiles/<int:pk>/', views.profile_detail),
-    path('profiles/create/', views.profile_create),
-    path('profiles/<int:pk>/update/', views.profile_update),
-    path('profiles/<int:pk>/delete/', views.profile_delete),
+    # path('profiles/', views.profile_list),
+    # # path('profiles/<int:pk>/', views.profile_detail),
+    # path('profiles/create/', views.profile_create),
+    # path('profiles/<int:pk>/update/', views.profile_update),
+    # path('profiles/<int:pk>/delete/', views.profile_delete),
 
     path('friend-requests/', views.friend_request_list),
     path('friend-requests/<int:pk>/', views.friend_request_detail),
