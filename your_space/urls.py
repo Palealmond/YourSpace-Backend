@@ -24,7 +24,7 @@ urlpatterns = [
 
 
     path('profiles/', views.profile_list),
-    path('profiles/<int:pk>/', views.profile_detail),
+    # path('profiles/<int:pk>/', views.profile_detail),
     path('profiles/create/', views.profile_create),
     path('profiles/<int:pk>/update/', views.profile_update),
     path('profiles/<int:pk>/delete/', views.profile_delete),
