@@ -59,3 +59,24 @@ class LikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
         fields = '__all__'
+
+
+# Add these helper functions to your serializers.py file:
+
+def get_profile_serializer(*args, **kwargs):
+    return ProfileSerializer(*args, **kwargs)
+
+def get_friend_request_serializer(*args, **kwargs):
+    return FriendRequestSerializer(*args, **kwargs)
+
+def get_friendship_serializer(*args, **kwargs):
+    return FriendshipSerializer(*args, **kwargs)
+
+def get_post_serializer(*args, **kwargs):
+    return PostSerializer(*args, **kwargs)
+
+def get_comment_serializer(*args, **kwargs):
+    return CommentSerializer(*args, **kwargs)
+
+def get_like_serializer(*args, **kwargs):
+    return LikeSerializer(*args, **kwargs)
