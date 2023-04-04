@@ -31,9 +31,9 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 
-    path('profiles/', views.profile_list),
+    path('profiles/', views.profile_detail),
     path('profiles/<int:pk>/', views.profile_detail),
-    path('profiles/create/', views.profile_list),
+    path('profiles/create/', views.profile_detail),
     path('profiles/<int:pk>/update/', views.profile_detail),
     path('profiles/<int:pk>/delete/', views.profile_detail),
 
