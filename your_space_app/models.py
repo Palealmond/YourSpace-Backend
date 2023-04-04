@@ -4,13 +4,16 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
+def default_profile_image():
+    return "./img/image.png"
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     bio = models.TextField(blank=True)
     location = models.CharField(max_length=255, blank=True)
     birthdate = models.DateField(blank=True, null=True)
-    profile_image = models.ImageField(upload_to='profile_images', blank=True)
+    profile_image = models.ImageField(upload_to='profile_images', blank=True, default=default_profile_image)
 
 
 class FriendRequest(models.Model):
