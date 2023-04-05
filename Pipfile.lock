@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "40ecf7028de59331f57ee18ae59905c635ad0e59f32ba9d9f2628fd04a9955aa"
+            "sha256": "6c1cb912c68f0bfd21bc0b068f586c6c4f74cb79b03836300485663c716d07af"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -136,6 +136,14 @@
             ],
             "index": "pypi",
             "version": "==3.14.0"
+        },
+        "djangorestframework-simplejwt": {
+            "hashes": [
+                "sha256:4c0d2e2513e12587d93501ac091781684a216c3ee614eb3b5a10586aef5ca845",
+                "sha256:d27d4bcac2c6394f678dea8b4d0d511c6e18a7f2eb8aaeeb8a7de601aeb77c42"
+            ],
+            "index": "pypi",
+            "version": "==5.2.2"
         },
         "gunicorn": {
             "hashes": [
@@ -306,6 +314,14 @@
             ],
             "index": "pypi",
             "version": "==2.9.6"
+        },
+        "pyjwt": {
+            "hashes": [
+                "sha256:69285c7e31fc44f68a1feb309e948e0df53259d579295e6cfe2b1792329f05fd",
+                "sha256:d83c3d892a77bbb74d3e1a2cfa90afaadb60945205d1095d9221f04466f64c14"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==2.6.0"
         },
         "python-dateutil": {
             "hashes": [

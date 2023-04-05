@@ -27,6 +27,10 @@ def profile_list(request):
 
 
 
+   
+
+
+
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def profile_detail(request, pk):
