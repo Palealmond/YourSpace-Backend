@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 
 from your_space_app.views import (
     ProfileViewSet, FriendRequestViewSet, FriendshipViewSet,
-    PostViewSet, CommentViewSet, LikeViewSet, MyView, CustomAuthToken
+    PostViewSet, CommentViewSet, LikeViewSet, MyView, CustomAuthToken, UserCreateView
 )
 
 router = DefaultRouter()
@@ -21,4 +21,6 @@ urlpatterns = [
     path('api/login/', CustomAuthToken.as_view(),  name='create-token'),
     path('api/verify/', MyView.as_view(), name='my-view'),
     path('', include(router.urls)),
+    path('create-user/', UserCreateView.as_view(), name='create-user'),
+
 ]

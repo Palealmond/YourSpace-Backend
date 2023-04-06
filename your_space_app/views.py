@@ -1,10 +1,10 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.response import Response
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from .models import Profile, FriendRequest, Friendship, Post, Comment, Like
 from .serializers import (
     ProfileSerializer, FriendRequestSerializer, FriendshipSerializer,
-    PostSerializer, CommentSerializer, LikeSerializer
+    PostSerializer, CommentSerializer, LikeSerializer, UserSerializer
 )
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -57,6 +57,17 @@ class LikeViewSet(viewsets.ModelViewSet):
         like.save()
         serializer = self.get_serializer(like)
         return Response(serializer.data)
+
+
+class UserCreateView(APIView):
+    serializer_class = UserSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CustomAuthToken(ObtainAuthToken):
