@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 
 from your_space_app.views import (
     ProfileViewSet, FriendRequestViewSet, FriendshipViewSet,
-    PostViewSet, CommentViewSet, LikeViewSet
+    PostViewSet, CommentViewSet, LikeViewSet, MyView, CustomAuthToken
 )
 
 router = DefaultRouter()
@@ -18,6 +18,7 @@ router.register(r'likes', LikeViewSet, basename='like')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
+    path('api/login/', CustomAuthToken.as_view(),  name='create-token'),
+    path('api/verify/', MyView.as_view(), name='my-view'),
     path('', include(router.urls)),
 ]
