@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action, api_view
-from .models import Profile, FriendRequest, Friendship, Post, Comment, Like
+from .models import Profile, FriendRequest, Friendship, Post, Comment, Like, User
 from .serializers import (
     ProfileSerializer, FriendRequestSerializer, FriendshipSerializer,
     PostSerializer, CommentSerializer, LikeSerializer, UserSerializer
@@ -67,6 +67,7 @@ class LikeViewSet(viewsets.ModelViewSet):
 
 class UserCreateView(APIView):
     serializer_class = UserSerializer
+    queryset = User.objects.all()
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
