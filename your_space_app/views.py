@@ -14,31 +14,37 @@ from rest_framework.views import APIView
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
 
 class FriendRequestViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = FriendRequest.objects.all()
     serializer_class = FriendRequestSerializer
 
 
 class FriendshipViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Friendship.objects.all()
     serializer_class = FriendshipSerializer
 
 
 class PostViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
 
 class CommentViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
 
 class LikeViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
 

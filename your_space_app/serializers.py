@@ -6,35 +6,33 @@ from .models import Profile, FriendRequest, Friendship, Post, Comment, Like
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email']
+        fields = ['username', 'password', 'email']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user = serializers.ReadOnlyField(source='user.username')
 
     class Meta:
         model = Profile
         fields = '__all__'
 
-    def create(self, validated_data):
-        user_data = validated_data.pop('user')
-        user = User.objects.create(**user_data)
-        profile = Profile.objects.create(user=user, **validated_data)
-        return profile
-
 
 class FriendRequestSerializer(serializers.ModelSerializer):
-    from_user = UserSerializer()
-    to_user = UserSerializer()
-
     class Meta:
         model = FriendRequest
-        fields = '__all__'
+        fields = ('id', 'from_user', 'to_user', 'created_at')
 
 
 class FriendshipSerializer(serializers.ModelSerializer):
-    user1 = UserSerializer()
-    user2 = UserSerializer()
+    user1 = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(), source='user1.username')
+    user2 = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(), source='user2.username')
 
     class Meta:
         model = Friendship
@@ -42,37 +40,24 @@ class FriendshipSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user = UserSerializer(source='user_id', read_only=True)
 
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ('id', 'user', 'content', 'created_at')
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-    post = PostSerializer()
+    user = UserSerializer(source='user_id', read_only=True)
 
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ('id', 'user', 'post', 'content', 'created_at')
 
 
 class LikeSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-    post = PostSerializer()
+    user = UserSerializer(source='user_id', read_only=True)
 
     class Meta:
         model = Like
-        fields = '__all__'
-
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['username', 'password', 'email']
-        extra_kwargs = {'password': {'write_only': True}}
-
-    def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        return user
+        fields = ('id', 'user', 'post', 'created_at')
