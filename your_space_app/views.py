@@ -83,8 +83,7 @@ class CustomAuthToken(ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
-        print(token)
-        return Response({'token': token.key, 'username': request.data['username']})
+        return Response({'id': user.id, 'username': user.username, 'token': token.key}, status=status.HTTP_200_OK)
 
 
 class MyView(APIView):
