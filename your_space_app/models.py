@@ -7,13 +7,16 @@ from django.contrib.auth.models import User
 def default_profile_image():
     return "./img/image.png"
 
+
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name="profile")
     name = models.CharField(max_length=255)
     bio = models.TextField(blank=True)
     location = models.CharField(max_length=255, blank=True)
     birthdate = models.DateField(blank=True, null=True)
-    profile_image = models.ImageField(upload_to='profile_images', blank=True, default=default_profile_image)
+    profile_image = models.ImageField(
+        upload_to='profile_images', blank=True, default=default_profile_image)
 
 
 class FriendRequest(models.Model):
@@ -33,19 +36,24 @@ class Friendship(models.Model):
 
 
 class Post(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="post")
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="comment")
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name="comment")
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
 
 class Like(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="like")
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name="like")
     created_at = models.DateTimeField(auto_now_add=True)
