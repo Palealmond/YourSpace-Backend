@@ -40,7 +40,7 @@ class FriendshipSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    user = UserSerializer(source='user_id', many=True, read_only=True)
+    user = UserSerializer(many=True, read_only=True)
 
     class Meta:
         model = Post
