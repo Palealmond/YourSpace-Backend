@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Profile, FriendRequest, Friendship, Post, Comment, Like
+from .models import Profile, FriendRequest, Friendship, Post
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -47,17 +47,17 @@ class PostSerializer(serializers.ModelSerializer):
         fields = ('id', 'user', 'content', 'created_at')
 
 
-class CommentSerializer(serializers.ModelSerializer):
-    user = UserSerializer(source='user_id', read_only=True)
+# class CommentSerializer(serializers.ModelSerializer):
+#     user = UserSerializer(source='user_id', read_only=True)
 
-    class Meta:
-        model = Comment
-        fields = ('id', 'user', 'post', 'content', 'created_at')
+#     class Meta:
+#         model = Comment
+#         fields = ('id', 'user', 'post', 'content', 'created_at')
 
 
-class LikeSerializer(serializers.ModelSerializer):
-    user = UserSerializer(source='user_id', read_only=True)
+# class LikeSerializer(serializers.ModelSerializer):
+#     user = UserSerializer(source='user_id', read_only=True)
 
-    class Meta:
-        model = Like
-        fields = ('id', 'user', 'post', 'created_at')
+#     class Meta:
+#         model = Like
+#         fields = ('id', 'user', 'post', 'created_at')

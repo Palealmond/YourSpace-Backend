@@ -42,18 +42,10 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
-class Comment(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="comment")
-    post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name="comment")
-    content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-
-
-class Like(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="like")
-    post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name="like")
-    created_at = models.DateTimeField(auto_now_add=True)
+# class Comment(models.Model):
+#     user = models.ForeignKey(
+#         User, on_delete=models.CASCADE, related_name="comment")
+#     post = models.ForeignKey(
+#         Post, on_delete=models.CASCADE, related_name="comment")
+#     content = models.TextField()
+#     created_at = models.DateTimeField(auto_now_add=True)

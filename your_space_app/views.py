@@ -1,10 +1,10 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action, api_view
-from .models import Profile, FriendRequest, Friendship, Post, Comment, Like, User
+from .models import Profile, FriendRequest, Friendship, Post, User
 from .serializers import (
     ProfileSerializer, FriendRequestSerializer, FriendshipSerializer,
-    PostSerializer, CommentSerializer, LikeSerializer, UserSerializer
+    PostSerializer,  UserSerializer
 )
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -37,32 +37,26 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
 
 
-class CommentViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
+# class LikeViewSet(viewsets.ModelViewSet):
+#     permission_classes = [IsAuthenticated]
+#     queryset = Like.objects.all()
+#     serializer_class = LikeSerializer
 
+#     @action(detail=True, methods=['post'])
+#     def like(self, request, pk=None):
+#         like = self.get_object()
+#         like.users.add(request.user)
+#         like.save()
+#         serializer = self.get_serializer(like)
+#         return Response(serializer.data)
 
-class LikeViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
-    queryset = Like.objects.all()
-    serializer_class = LikeSerializer
-
-    @action(detail=True, methods=['post'])
-    def like(self, request, pk=None):
-        like = self.get_object()
-        like.users.add(request.user)
-        like.save()
-        serializer = self.get_serializer(like)
-        return Response(serializer.data)
-
-    @action(detail=True, methods=['post'])
-    def unlike(self, request, pk=None):
-        like = self.get_object()
-        like.users.remove(request.user)
-        like.save()
-        serializer = self.get_serializer(like)
-        return Response(serializer.data)
+#     @action(detail=True, methods=['post'])
+#     def unlike(self, request, pk=None):
+#         like = self.get_object()
+#         like.users.remove(request.user)
+#         like.save()
+#         serializer = self.get_serializer(like)
+#         return Response(serializer.data)
 
 
 class UserCreateView(APIView):
