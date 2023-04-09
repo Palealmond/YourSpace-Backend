@@ -11,6 +11,13 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.views import APIView
+from rest_framework.generics import RetrieveAPIView
+
+
+class ProfileDetailAPIView(RetrieveAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    lookup_field = 'user_id'
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
