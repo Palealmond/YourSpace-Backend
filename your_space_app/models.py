@@ -36,10 +36,16 @@ class Friendship(models.Model):
 
 
 class Post(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="post")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    subject = models.CharField(max_length=255)
+    category = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
 
 
 # class Comment(models.Model):

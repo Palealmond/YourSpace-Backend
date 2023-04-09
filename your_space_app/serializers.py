@@ -40,14 +40,13 @@ class FriendshipSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
+
     class Meta:
         model = Post
-        fields = ['id', 'title', 'content', 'author', 'created_at']
-
-
-class PostListSerializer(serializers.ListSerializer):
-    child = PostSerializer()
-
+        fields = ['id', 'title', 'content', 'created_at',
+                  'updated_at', 'subject', 'category', 'user']
+        read_only_fields = ['created_at', 'updated_at']
 
 # class CommentSerializer(serializers.ModelSerializer):
 #     user = UserSerializer(source='user_id', read_only=True)
