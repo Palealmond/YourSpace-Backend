@@ -40,11 +40,13 @@ class FriendshipSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    user = UserSerializer(many=True, read_only=True)
-
     class Meta:
         model = Post
-        fields = ('id', 'user', 'content', 'created_at')
+        fields = ['id', 'title', 'content', 'author', 'created_at']
+
+
+class PostListSerializer(serializers.ListSerializer):
+    child = PostSerializer()
 
 
 # class CommentSerializer(serializers.ModelSerializer):

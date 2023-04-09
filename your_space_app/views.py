@@ -4,7 +4,7 @@ from rest_framework.decorators import action, api_view
 from .models import Profile, FriendRequest, Friendship, Post, User
 from .serializers import (
     ProfileSerializer, FriendRequestSerializer, FriendshipSerializer,
-    PostSerializer,  UserSerializer
+    PostSerializer,  UserSerializer, PostListSerializer
 )
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -32,9 +32,13 @@ class FriendshipViewSet(viewsets.ModelViewSet):
 
 
 class PostViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return PostListSerializer
+        return PostSerializer
 
 
 # class LikeViewSet(viewsets.ModelViewSet):
