@@ -25,6 +25,4 @@ urlpatterns = [
     path('profiles/<int:user_id>/',
          ProfileDetailAPIView.as_view(), name='profile-detail'),
 
-
-
 ]
