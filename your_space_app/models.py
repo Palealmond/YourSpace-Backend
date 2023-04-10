@@ -11,12 +11,12 @@ def default_profile_image():
 class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="profile")
-    name = models.CharField(max_length=255)
-    bio = models.TextField(blank=True)
-    location = models.CharField(max_length=255, blank=True)
+    name = models.CharField(max_length=255, default="User")
+    bio = models.TextField(blank=True, default="No bio yet")
+    location = models.CharField(max_length=255, blank=True, default="Nowhere")
     birthdate = models.DateField(blank=True, null=True)
     profile_image = models.ImageField(
-        upload_to='profile_images', blank=True, default=default_profile_image)
+        upload_to='profile_images', blank=True, default=default_profile_image())
 
 
 class FriendRequest(models.Model):
