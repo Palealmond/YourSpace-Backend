@@ -25,6 +25,17 @@ class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # Manually set the user_id field to the ID of the user making the request
+        serializer.validated_data['user_id'] = request.user.id
+
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
 
 class FriendRequestViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
