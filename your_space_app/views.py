@@ -14,10 +14,11 @@ from rest_framework.views import APIView
 from rest_framework.generics import RetrieveAPIView
 
 
-class ProfileDetailAPIView(RetrieveAPIView):
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
-    lookup_field = 'user_id'
+class ProfileByUsernameAPIView(APIView):
+    def get(self, request, username):
+        profile = get_object_or_404(Profile, user__username=username)
+        serializer = ProfileSerializer(profile)
+        return Response(serializer.data)
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
